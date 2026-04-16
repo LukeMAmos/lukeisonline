@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NOTES</title>
+    <link rel="icon" type="image/x-icon" href="Images/ICONO.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .gridBackground {
+
+           /* This creates a base grey background */
+            background-color: #ff1313; 
+            background-size: 50px 50px;
+
+            /* Create a grid pattern background */
+            background-image: 
+                linear-gradient(to right, #1f26ed 2px, transparent 2px), 
+                linear-gradient(to bottom, #1f26ed 2px, transparent 2px);
+
+
+        }
+
+        body {
+            background: #ff1313;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+            font-family: 'Bitcount Grid Double', monospace;
+            font-weight: 200;
+        }
+        h1{
+            font-family: 'Bitcount Grid Double', monospace;
+            text-align: left;
+            color: #ffffff;
+            font-weight: 200; 
+            font-size: 75px;
+            letter-spacing: 0.1em;
+
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            margin-left: 5px;
+            position: relative;
+            z-index: 1;
+            
+            
+        }
+        .back-button {
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #ffffff;
+            font-weight: 200;
+            font-size: 36px;             
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;       
+            
+            background: transparent;
+            border: 3px solid #ffffff;
+            border-radius: 12px;
+            padding: 10px 25px;
+            
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .back-button:hover {
+            background: #ffffff;
+            color: #1f26ed;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 5px 20px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        /* ============================================
+           WARP-STYLE IMAGE CAROUSEL COMPONENT
+           ============================================ */
+
+        .warp-carousel {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 80px;
+        }
+
+        .carousel-viewport {
+            position: relative;
+            overflow: hidden;
+            background: #000;
+            border: 4px solid #1f26ed;
+            border-radius: 24px;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .carousel-slide {
+            flex: 0 0 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Navigation Arrows - Only navigation method */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #1f26ed;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #1f26ed;
+            transition: all 0.3s ease;
+            z-index: 10;
+            font-family: 'Bitcount Grid Double', monospace;
+            font-weight: 700;
+        }
+
+        .carousel-arrow:hover {
+            background: #ff1313;
+            color: #fff;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 19, 19, 0.5);
+        }
+
+        .carousel-arrow.prev {
+            left: 10px;
+        }
+
+        .carousel-arrow.next {
+            right: 10px;
+        }
+
+        .carousel-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Counter only */
+        .carousel-counter {
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            margin-top: 20px;
+            letter-spacing: 0.1em;
+        }
+
+        /* Multiple carousels spacing */
+        .warp-carousel + .warp-carousel {
+            margin-top: 80px;
+        }
+
+        .carousel-title {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 200;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            .about-button, .writing-button {
+                font-size: 24px;
+            }
+
+            .warp-carousel {
+                padding: 0 60px;
+            }
+
+            .carousel-arrow {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            .carousel-arrow.prev {
+                left: 5px;
+            }
+
+            .carousel-arrow.next {
+                right: 5px;
+            }
+        }
+
+        /* Footer styling */
+        .footer {
+            position: relative;
+            z-index: 1;
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            
+            background: transparent;
+            border: 3px solid #ffffff;
+            border-radius: 16px;
+            padding: 15px 30px;
+            
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover {
+            background: #ffffff;
+            color: #1f26ed;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .social-link {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+            
+            .social-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="gridBackground" style="position: fixed; inset: 0; z-index: 0;"></div>
+
+       <!-- Header with title and button side by side -->
+    <div class="header-container">
+        <h1 class="title"> NOTEPAD </h1>
+        <a href="index.html" class="back-button"> GO BACK</a>
+    </div> 
+
+    <div class="warp-carousel" data-carousel="sketchbook">
+        <h2 class="carousel-title">NOTEPAD ONE</h2>
+        
+        <div class="carousel-viewport">
+            <div class="carousel-track">
+                <div class="carousel-slide"><img src="images/sketchbook/01.jpg" alt="Page 1"></div>
+                <div class="carousel-slide"><img src="images/sketchbook/02.jpg" alt="Page 2"></div>
+                <div class="carousel-slide"><img src="images/sketchbook/03.jpg" alt="Page 3"></div>
+                <div class="carousel-slide"><img src="images/sketchbook/04.jpg" alt="Page 4"></div>
+            </div>
+        </div>
+
+        <button class="carousel-arrow prev" onclick="carousel.prev('sketchbook')">&lt;</button>
+        <button class="carousel-arrow next" onclick="carousel.next('sketchbook')">&gt;</button>
+
+        <div class="carousel-counter"><span class="current">1</span> / <span class="total">4</span></div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            
+            <!-- Instagram Link -->
+            <a href="https://instagram.com/sgwarrr" target="_blank" class="social-link">
+                <span>Instagram</span>
+            </a>
+
+            <!-- Email Link -->
+            <a href="mailto:lukeamos2111@gmail.com" class="social-link">
+                <span>Email</span>
+            </a>
+
+        </div>
+    </footer>
+
+    <script>
+
+
+        // REUSABLE CAROUSEL SYSTEM
+
+        const carousel = {
+            data: {},
+
+            init: function(id, images) {
+                this.data[id] = {
+                    images: images,
+                    current: 0
+                };
+
+                const container = document.querySelector(`[data-carousel="${id}"]`);
+                const track = container.querySelector('.carousel-track');
+                
+                // Build slides from images array
+                track.innerHTML = images.map(src => 
+                    `<div class="carousel-slide"><img src="${src}" alt=""></div>`
+                ).join('');
+
+                // Update total counter
+                container.querySelector('.total').textContent = images.length;
+
+                this.update(id);
+            },
+
+            next: function(id) {
+                const data = this.data[id];
+                if (!data) return;
+                data.current = (data.current + 1) % data.images.length;
+                this.update(id);
+            },
+
+            prev: function(id) {
+                const data = this.data[id];
+                if (!data) return;
+                data.current = (data.current - 1 + data.images.length) % data.images.length;
+                this.update(id);
+            },
+
+            update: function(id) {
+                const data = this.data[id];
+                const container = document.querySelector(`[data-carousel="${id}"]`);
+                
+                // Move track
+                const track = container.querySelector('.carousel-track');
+                track.style.transform = `translateX(-${data.current * 100}%)`;
+
+                // Update counter
+                container.querySelector('.current').textContent = data.current + 1;
+            }
+        };
+
+        // Initialize carousels
+        carousel.init('sketchbook', [
+            'images/sketchbook/01.jpg',
+            'images/sketchbook/02.jpg',
+            'images/sketchbook/03.jpg',
+            'images/sketchbook/04.jpg'
+        ]);
+
+        carousel.init('project-notes', [
+            'images/notes/01.jpg',
+            'images/notes/02.jpg',
+            'images/notes/03.jpg'
+        ]);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const hovered = document.querySelector('.warp-carousel:hover');
+            if (!hovered) return;
+            
+            const id = hovered.dataset.carousel;
+            if (e.key === 'ArrowLeft') carousel.prev(id);
+            if (e.key === 'ArrowRight') carousel.next(id);
+        });
+    </script>
+</body>
+</html>

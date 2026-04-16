@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>MEE!!</title>
+    <link rel="icon" type="image/y-icon" href="Images/ICONO.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .gridBackground {
+
+            /* This creates a base grey background */
+            background-color: #ff1313; 
+            background-size: 50px 50px;
+
+            /* Create a grid pattern background */
+            background-image: 
+                linear-gradient(to right, #1f26ed 2px, transparent 2px), 
+                linear-gradient(to bottom, #1f26ed 2px, transparent 2px);
+
+        }
+
+        body {
+            background: #ff1313;
+            min-height: 100vh;
+            height: auto;
+            position: relative;
+        }
+        h1{
+            font-family: 'Bitcount Grid Double', monospace;
+            text-align: left;
+            color: #ffffff;
+            font-weight: 200; 
+            font-size: 75px;
+            letter-spacing: 0.1em;
+
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            margin-left: 5px;
+            position: relative;
+            z-index: 1;
+            
+            
+        }
+        .back-button {
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #ffffff;
+            font-weight: 200;
+            font-size: 36px;              /* Smaller than h1 (75px) */
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;        /* Remove underline */
+            
+            background: transparent;
+            border: 3px solid #ffffff;
+            border-radius: 12px;
+            padding: 10px 25px;
+            
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        .back-button:hover {
+            background: #ffffff;
+            color: #1f26ed;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 5px 20px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        .pick-of-me {
+
+            flex: 0 0 auto;         /* ← CHANGE to this (was just flex: 0 0 auto) */
+            flex-shrink: 0; 
+
+            --ph-border-color: #0000ff;
+            --ph-border-width: 3px;
+            --ph-border-radius: 16px;
+            --ph-bg-color: #ffffff;
+            --ph-padding: 20px;
+            --ph-shadow: 0 8px 32px rgba(0, 0, 255, 0.15);
+    
+            /* Remove container-type, change display */
+            display: block;
+            width: auto;  /* Fit to content */
+            background: var(--ph-bg-color);
+            border: var(--ph-border-width) solid var(--ph-border-color);
+            border-radius: var(--ph-border-radius);
+            padding: var(--ph-padding);
+            box-shadow: var(--ph-shadow);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .pick-of-me img {
+        width: 300px;  /* Fixed width or use max-width */
+        height: auto;
+        display: block;
+        border-radius: 12px;
+        }
+
+        /* Hover effect */
+        .pick-of-me:hover {
+            --ph-shadow: 0 12px 48px rgba(0, 0, 255, 0.25);
+            transform: translateY(-4px);
+            
+        }
+        
+        .text-content {
+            max-width: none;
+            margin: 0;
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #333;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            flex: 1;
+            height: 100%;           /* ← ADD THIS */
+            display: flex;          /* ← ADD THIS */
+            align-items: center;    /* ← ADD THIS - centers text vertically */
+            justify-content: center; /* ← ADD THIS - centers text horizontally */
+
+            border: 3px solid #0000ff;
+            border-radius: 16px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 255, 0.15);
+
+        }
+
+        /* Name under photo styling */
+        .name-under-photo {
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #333;
+            font-size: 30px;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+            background: white;
+            border: 3px solid #0000ff;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 255, 0.15);
+        }
+        
+        /* Photo column container */
+        .photo-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+         /* ============================================
+           REUSABLE PHOTO HOLDER COMPONENT
+           Use class="photo-holder" on any container
+           ============================================ */
+        .gallery-grid {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            align-items: stretch;
+        }
+        
+        /* Footer styling */
+        .footer {
+            position: relative;
+            z-index: 1;
+            padding: 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            font-family: 'Bitcount Grid Double', monospace;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 200;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            
+            background: transparent;
+            border: 3px solid #ffffff;
+            border-radius: 16px;
+            padding: 15px 30px;
+            
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: left 0.5s ease;
+        }
+
+        .social-link:hover {
+            background: #ffffff;
+            color: #1f26ed;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .social-link {
+                font-size: 18px;
+                padding: 12px 20px;
+            }
+            
+            .social-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="gridBackground" style="position: fixed; inset: 0; z-index: 0;"></div>
+
+       <!-- Header with title and button side by side -->
+    <div class="header-container">
+        <h1 class="title">ABOUT ME </h1>
+        <a href="index.html" class="back-button"> GO BACK</a>
+    </div> 
+
+    <div class="gallery-grid">
+        
+        <div class="text-content">
+            <p>Hey! my name is luke i like all things creative technology especially interactive audio. On this page site I will be posting my previous projects as well as projects currently in development </p>
+        </div>
+
+        <div class="photo-column">
+            <div class="pick-of-me">
+                <img src="images/MeIMGHover.png" alt="Me" >
+            </div>
+            <div class="name-under-photo">
+                <p>Luke Amos</p>
+            </div>
+        </div>
+
+    </div>
+        <footer class="footer">
+        <div class="footer-container">
+            
+            <!-- Instagram Link -->
+            <a href="https://instagram.com/sgwarrr" target="_blank" class="social-link">
+                <span>Instagram</span>
+            </a>
+
+            <!-- Email Link -->
+            <a href="mailto:lukeamos2111@gmail.com" class="social-link">
+                <span>Email</span>
+            </a>
+
+        </div>
+    </footer>
+
+</body>
+</html>
